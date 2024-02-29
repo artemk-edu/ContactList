@@ -2,7 +2,6 @@ package Front_End.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 public class ContactDetailsPage extends BasePage{
     @FindBy(id="delete")
     private WebElement deleteContactButton;
