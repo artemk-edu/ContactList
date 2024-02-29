@@ -7,18 +7,14 @@ import Front_End.utils.Driver;
 import io.restassured.RestAssured;
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
-import org.testng.asserts.SoftAssert;
 
 
-import java.time.Duration;
 import java.util.List;
 
 
 
-public class TestOne extends BasePage {
+public class ContactListTest_E2E extends BasePage {
     SignUpPage signUpPage = new SignUpPage();
     AddContactPage addContactPage = new AddContactPage();
     ContactListPage contactListPage = new ContactListPage();
