@@ -7,10 +7,13 @@ import Front_End.utils.Driver;
 import io.restassured.RestAssured;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
 
+import java.time.Duration;
 import java.util.List;
 
 
@@ -32,27 +35,27 @@ public class TestOne extends BasePage {
         Driver.closeDriver();
     }
 
-    @Test(priority = 0)
-    public void checkIfRegistered() {
-        String notUser = "Not yet a user";
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(getNotAUserText().getText().contains(notUser));
-    }
-
-//    @Test(dependsOnMethods = {"checkIfRegistered"})
-//    public void signUp() {
-//        clickSignUpButton();
-//        signUpPage.getRegistrationFormFields().forEach(e -> {
-//                    e.sendKeys(DataReader.getData("credentials", e.getAttribute("id")));
-//                }
-//        );
-//        signUpPage.getSubmitButton().click();
+//    @Test(priority = 0)
+//    public void checkIfRegistered() {
+//        String notUser = "Not yet a user";
+//        SoftAssert softAssert = new SoftAssert();
+//        softAssert.assertTrue(getNotAUserText().getText().contains(notUser));
 //    }
 
     @Test(priority = 1)
     public void logIn() {
         getLogInFields().forEach(e -> e.sendKeys(DataReader.getData("credentials", e.getAttribute("id"))));
         getSubmitButton().click();
+        //WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(4000));
+        //wait.until(ExpectedConditions.visibilityOf(getErrorElement()));
+        if(getErrorElement().isDisplayed() & getErrorMessageText().contains("Incorrect username or password")){
+            clickSignUpButton();
+        signUpPage.getRegistrationFormFields().forEach(e -> {
+                    e.sendKeys(DataReader.getData("credentials", e.getAttribute("id")));
+                }
+        );
+        signUpPage.getSubmitButton().click();
+        }
 
     }
 

@@ -19,9 +19,10 @@ public class BasePage {
     private WebElement submitButton;
     @FindBy(xpath = "//form/following-sibling::p")
     private WebElement notAUserText;
-
     @FindBys(@FindBy(xpath = "//form//p//input"))
     private List<WebElement> logInFields;
+    @FindBy(xpath = "//span[@id='error']")
+    private WebElement errorElement;
     public void clickSignUpButton() {
         signUpButton.click();
     }
@@ -35,5 +36,12 @@ public class BasePage {
 
     public List<WebElement> getLogInFields() {
         return logInFields;
+    }
+    public String getErrorMessageText(){
+        return errorElement.getText();
+    }
+
+    public WebElement getErrorElement() {
+        return errorElement;
     }
 }
